@@ -23,7 +23,7 @@ const Navigation = () => {
                             <NavLink
                                 className="nav-link"
                                 activeClassName="is-active"
-                                to="/home"
+                                to="/"
                                 exact
                             >
                                 Accueil
@@ -36,7 +36,7 @@ const Navigation = () => {
                                 to="/home"
                                 exact
                             >
-                                Accueil
+                                Dashboard
                             </NavLink>
                         </li>
                     </ul>

@@ -15,28 +15,32 @@ const ProductsList = () => {
     }, [dispatch]);
 
     return (
-        <div>
+        <div className="container">
             <table className="table table-striped table-hover border my-5">
                 <thead>
                 <tr>
                     <th scope="col-3">Titre</th>
                     <th scope="col-1">Prix</th>
-                    <th scope="col-5">Description</th>
-                    <th scope="col-3">Image</th>
+                    <th scope="col-4">Description</th>
+                    <th scope="col-5">Image</th>
                     <th scope="col-1">Quantité</th>
-                    <th scope="col-3">Actions</th>
+                    <th scope="col-4">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {
                     !isEmpty(products) && products.map((product, index) =>
                         <tr>
-                            <td>{ product.title }</td>
+                            <td className="w-25">{ product.title }</td>
                             <td>{ product.price }</td>
-                            <td>{ product.description }</td>
-                            <td></td>
+                            <td className="w-25">{ product.description }</td>
+                            <td className="w-25">
+                                <img src={`./assets/images/${product.image}`} alt={product.title}
+                                     className="img-thumbnail w-25"
+                            />
+                            </td>
                             <td>{ product.quantity}</td>
-                            <td>
+                            <td className="w-25">
                                 <Link
                                     className="btn btn-primary"
                                     state={{ data: product }}

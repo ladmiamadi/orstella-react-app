@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,16 +6,20 @@ import * as Yup from 'yup';
 
 import {useDispatch} from "react-redux";
 import {addProduct, editProduct, getProducts} from "../actions/product.action";
+import axios from "axios";
 
 function AddEdit() {
     const location = useLocation();
     const product = location.state?.data;
-
     const isAddMode = !product;
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [selectedFile, setSelectedFile] =useState(null);
+    const fileSelectedHandler = event => {
+        setSelectedFile(event.target.files[0])
+    }
     // form validation rules
     const validationSchema = Yup.object().shape({
         title: Yup.string()
@@ -26,6 +30,8 @@ function AddEdit() {
             .required('Description is required'),
         quantity: Yup.number()
             .required('Quantity is required'),
+        image: Yup.mixed()
+            .required('Image file is required')
     });
 
     // functions to build form returned by useForm() hook
@@ -40,28 +46,55 @@ function AddEdit() {
     }
 
     async function createProduct(data) {
-        const postData = {
-            title: data.title,
-            price: data.price,
-            description: data.description,
-            quantity: data.quantity
+        if(selectedFile) {
+            const dataForm = new FormData()
+            dataForm.append('file', selectedFile)
+            axios.post("http://localhost:8000/upload", dataForm, {
+                // receive two    parameter endpoint url ,form data
+            })
+
+                .then(res => { // then print response status
+                    console.log(res.statusText)
+                })
         }
 
-        await dispatch(addProduct(postData));
-        dispatch(getProducts());
-        navigate("/home");
-    }
-
-    function updateProduct(data) {
         const postData = {
             title: data.title,
             price: data.price,
             description: data.description,
             quantity: data.quantity,
-            id: data.id
+            image: selectedFile.name
+        }
+
+        await dispatch(addProduct(postData));
+        //dispatch(getProducts());
+        navigate("/home");
+    }
+
+    function updateProduct(data) {
+        if(selectedFile !== data.image) {
+            const dataForm = new FormData()
+            dataForm.append('file', selectedFile)
+            axios.post("http://localhost:8000/upload", dataForm, {
+                // receive two    parameter endpoint url ,form data
+            })
+
+                .then(res => { // then print response status
+                    console.log(res.statusText)
+                })
+        }
+        const postData = {
+            title: data.title,
+            price: data.price,
+            description: data.description,
+            quantity: data.quantity,
+            id: data.id,
+            image: selectedFile.name
         }
 
         dispatch(editProduct(postData));
+        dispatch(getProducts());
+        navigate("/home");
     }
 
     useEffect(() => {
@@ -97,6 +130,15 @@ function AddEdit() {
                     <label>Quantité</label>
                     <input name="quantity" type="text" {...register('quantity', { required: true })} className={`form-control ${errors.quantity ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.quantity?.message}</div>
+                </div>
+                <div className="mb-3">
+                    <label>Merci de choisir une image</label>
+                    <input name="image" type="file"
+                           {...register('image', { required: true })}
+                           className={`form-control ${errors.image ? 'is-invalid' : ''}`}
+                           onChange={fileSelectedHandler}
+                    />
+                    <div className="invalid-feedback">{errors.image?.message}</div>
                 </div>
                 <div className="form-group">
                     <button type="Ajouter" disabled={formState.isSubmitting} className="btn btn-success">

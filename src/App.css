@@ -22,3 +22,11 @@
 .post-form {
   background-color: #ECF2FF;
 }
+
+.card-home {
+  height: 400px;
+}
+
+.card {
+  height: 100%;
+}
