@@ -2,19 +2,41 @@
   "products": [
     {
       "title": "Produits de ménage",
-      "price": 15,
+      "price": 123,
       "description": "Nos produits sont super efficaces",
       "quantity": 22,
       "image": "original-1.jpg",
       "id": 1
     },
     {
-      "title": "Produit de beauté",
-      "price": 15,
+      "title": "Fruits et légumes",
+      "price": 35.25,
       "description": "description",
+      "quantity": 14,
+      "image": "shutterstock-722718097.webp",
+      "id": 2
+    },
+    {
+      "title": "Produit de beauté",
+      "price": 123,
+      "description": "lorem ipsum",
+      "quantity": 96,
+      "image": "istockphoto-1136422297-612x612.jpg",
+      "id": 3
+    },
+    {
+      "title": "Autre produits",
+      "price": 35.25,
+      "description": "Nos produits sont super efficaces",
       "quantity": 22,
-      "id": 2,
-      "image": "definir-evolution-min.jpg"
+      "image": "definir-evolution-min.jpg",
+      "id": 4
+    }
+  ],
+  "users": [
+    {
+      "email": "supermarket@supermarket.com",
+      "password": "supermarket"
     }
   ]
 }
