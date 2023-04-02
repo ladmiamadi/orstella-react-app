@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "title": "Produits de ménage",
+      "price": 123,
+      "description": "Nos produits sont super efficaces",
+      "quantity": 25,
+      "id": "1"
+    },
+    {
+      "title": "Produits de beauté",
+      "price": 50,
+      "description": "Une description concérnant ces produits",
+      "quantity": 16,
+      "id": "2"
+    },
+    {
+      "title": "Parfum",
+      "price": 96.5,
+      "description": "Une description de test",
+      "quantity": 16,
+      "id": "3"
+    }
+  ]
+}
