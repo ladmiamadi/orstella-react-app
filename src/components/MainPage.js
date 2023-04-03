@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {getProducts} from "../actions/product.action";
 import Navigation from "./Navigation";
+import {isEmpty} from "../utils/Utils";
 
 const MainPage = () => {
     const products = useSelector(state => state.productReducer);
@@ -16,7 +17,7 @@ const MainPage = () => {
             <Navigation />
             <div className="row my-5 w-75 mx-auto">
                 {
-                    products.map((product, index) => {
+                    !isEmpty(products) &&products.map((product, index) => {
                         return (
                             <div className="col-4 my-4 card-home">
                                 <div className="card" style={{width: "18rem", height: "23rem"}}>
