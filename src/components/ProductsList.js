@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPenToSquare, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import { deleteProduct, getProducts} from "../actions/product.action";
+import ProductModal from "./ProductModal";
 
 const ProductsList = () => {
     const products = useSelector(state => state.productReducer);
@@ -41,16 +42,19 @@ const ProductsList = () => {
                             </td>
                             <td>{ product.quantity}</td>
                             <td className="w-25">
+                                <ProductModal product={product}/>
                                 <Link
-                                    className="btn btn-primary"
+                                    className="btn btn-primary mx-2"
                                     state={{ data: product }}
                                     to="/add-product"
                                     key={index}
+                                    title="Editer"
                                 >
                                     <FontAwesomeIcon icon={faPenToSquare} /></Link>
                                 <button
                                     className="btn btn-danger mx-3"
                                     onClick={() => dispatch(deleteProduct(product.id))}
+                                    title="Supprimer"
                                 >
                                     <FontAwesomeIcon icon={faTrashCan} />
                                 </button>

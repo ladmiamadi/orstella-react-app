@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
-import {Button, Modal} from "antd";
+import { Modal} from "antd";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const ProductModal = ({product}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,9 +16,9 @@ const ProductModal = ({product}) => {
     };
     return (
         <>
-            <Button type="primary" className="align-self-end mt-auto" onClick={showModal}>
-                Détails
-            </Button>
+            <button className="align-self-end mt-auto btn btn-primary" onClick={showModal}>
+                <FontAwesomeIcon icon={faEye} />
+            </button>
             <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <img  src={'./assets/images/' + product.image} className="card-img-top" alt={product.title}/>
                 <h2 className="my-3 text-center">{product.title}</h2>
